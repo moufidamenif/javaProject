@@ -6,37 +6,36 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Registration Form</title>
-</head>
-<body>
-<div>
-    <h1>User Register Form</h1>
-    <form action="<%= request.getContextPath() %>/register" method="POST">
-        <table style="width: 80%">
-            <tr>
-                    <td>UserName</td>
-                <td><label>
-                    <input type="text" name="userName" required/>
-                </label></td>
-            </tr>
-            <tr>
-                <td>email</td>
-                <td><label>
-                    <input type="email" name="userEmail" required/>
-                </label></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><label>
-                    <input type="password" name="userPassword" required/>
-                </label></td>
-            </tr>
+    <form id="registerForm" action="<%= request.getContextPath() %>/register" method="POST">
+            <div class ="tr">
 
-        </table>
-        <input type="submit" value="Submit" />
+                   <label for="userName" style="display: block; margin-bottom: 10px;">userName </label>
+                       <input type="text" name="userName" required id="userName" style="
+    border-radius: 20px;
+     width : 400px;
+    height: 30px;
+    border-color: #49BBBD;"/>
+                </div>
+            </div>
+            <div class="tr">
+
+                    <label for="userEmail" style="display: block; margin-bottom: 10px;">email</label>
+                        <input type="email" name="userEmail" required id ="userEmail" style="
+    border-radius: 20px;
+     width : 400px;
+    height: 30px;
+    border-color: #49BBBD;"/>
+            </div>
+            <div class="tr ">
+
+                <label for="userPassword" style="display: block; margin-bottom: 10px;">userPassword</label>
+                    <input type="password" name="userPassword" required id ="userPassword" style="
+    border-radius: 20px;
+    width : 400px;
+    height: 30px;
+    border-color: #49BBBD;"/>
+
+            </div>
+        <input type="submit" value="Submit"  style="margin-top: 30px; width : 400px;
+    height: 30px;background-color: #49BBBD ;border-radius: 20px " />
     </form>
-</div>
-</body>
-</html>

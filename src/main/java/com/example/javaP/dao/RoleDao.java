@@ -9,46 +9,43 @@ import java.util.List;
 
 public class RoleDao {
 
-    private final EntityManager emf=JpaUtil.getEntityManagerFactory().createEntityManager();;
+
 
 
 public RoleDao() {
 
         }
 
-    public void initializeRoles() {
+    public Role findRole(String roleName) {
+          EntityManager  em;
+        em = JpaUtil.getEntityManagerFactory().createEntityManager();
 
-        this.emf.getTransaction().begin();
-        List<String> roleNames = Arrays.asList("USER", "PROFESSOR", "ADMIN");
+        try {
+            // Start transaction
+            em.getTransaction().begin();
 
-        for (String roleName : roleNames) {
-            boolean exists = !emf.createQuery("SELECT r FROM Role r WHERE r.roleName = :name", Role.class)
+            // Get the role from the database
+            Role role = em.createQuery("SELECT r FROM Role r WHERE r.roleName = :name", Role.class)
                     .setParameter("name", roleName)
-                    .getResultList()
-                    .isEmpty();
+                    .getSingleResult();
 
-            if (!exists) {
-                Role role = new Role();
-                role.setRoleName(roleName);
-                emf.persist(role);
+            // Commit transaction
+            em.getTransaction().commit();
+            return role;
+
+        } catch (NoResultException e) {
+            throw new EntityNotFoundException("Role with name " + roleName + " not found");
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();  // Rollback in case of an error
+            }
+            e.printStackTrace();
+            System.err.println("Error finding role.");
+            return null; // Return null or handle it based on your needs.
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close(); // Always close the EntityManager
             }
         }
-
-        emf.getTransaction().commit();
-        emf.close();
-    }
-    public Role findRole(String roleName) {
-        this.emf.getTransaction().begin();
-
-    Role role = emf.createQuery("SELECT r FROM Role r WHERE r.roleName = :name", Role.class).setParameter("name", roleName).getSingleResult();
-        emf.getTransaction().commit();
-        emf.close();
-    if (role != null) {
-        return role ;
-    }
-    else {
-        emf.getTransaction().commit();
-        throw new EntityNotFoundException("Role with name " + roleName + " not found");
-    }
     }
 }

@@ -62,5 +62,15 @@ public class secretKey {
             return base64Encoder(iv) + ":"
                     + base64Encoder(cryptoText);
         }
+    public String hashPassword(String password, byte[] salt, int iterations, int keyLength) {
+        try {
+            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            byte[] hash = skf.generateSecret(spec).getEncoded();
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException("Error while hashing a password: " + e.getMessage(), e);
+        }
+    }
     }
 

@@ -1,16 +1,11 @@
 package com.example.javaP.models;
 import com.example.javaP.dao.RoleDao;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import java.util.List;
+
 @Entity
 public class User {
     @Id
@@ -40,8 +35,15 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
-
-
+    @OneToMany(mappedBy = "professor",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Subject> taughtSubjects= new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "use-subject", // join table name
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "subjectId")
+    )
+    private List<Subject> subjects = new ArrayList<>();
     public User() {
         emailValidated = false;
         resetPasswordvalidated = false;
@@ -55,6 +57,9 @@ public class User {
         this.createdDate = new Date();
         this.userEmail = userEmail;
         this.userPassword =userPassword;
+    }
+    public genderType getUserGender(){
+        return this.userGender;
     }
 public Long getUserId() {
         return userId;
@@ -81,13 +86,25 @@ public boolean getResetPasswordvalidated() {
 public void setResetPasswordvalidated(boolean resetPasswordvalidated) {
         this.resetPasswordvalidated = resetPasswordvalidated;
 }
-
-public String getToken() {
-        return token;
+public void setUserPhone(long userPhone) {
+        this.userPhone = userPhone;
 }
-public void setToken(String token) {
-        this.token = token;
+public String getUserPassword() {
+        return userPassword;
+}
+
+public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+}
+public void setUserGender(genderType userGender) {
+        this.userGender = userGender;
+}
+public void setUserDateOfBirth(Date userDateOfBirth) {
+        this.userDateOfBirth = userDateOfBirth;
 }
 
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

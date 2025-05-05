@@ -9,19 +9,23 @@
 <html>
 <head>
     <title>Landing Page</title>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/landingPage.css">
-
+    <link rel="stylesheet" type="text/css" href="./css/landingPage.css">
+    <script src="./js/landingPage.js"></script>
 </head>
 <body>
+
+
 <div  class="wrapper">
 <img src="./images/landingPage.png"  >
     <div >
     <h1>welcome to Learnify</h1>
-        <div>
-            <button>Login</button>
-            <button>Register</button>
+        <div id ="container_buttons">
+            <button id ="login_button"  onclick=showForm('login.jsp') >Login</button>
+            <button  id ="register_button"  onclick=showForm('register.jsp') >Register</button>
+
         </div>
-            <p>Education is key to success </p>
+            <h1>Education is key to success </h1>
+        <div id="formContainer"></div>
 
 
     </div>
