@@ -30,4 +30,19 @@ public class SubjectDao {
         em.close();
         return subjects;
     }
+    public void removeSubject(String subjectName, User user) {
+        EntityManager em=JpaUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+        List<Subject> subjects = em.createQuery(
+                        "SELECT s FROM Subject s WHERE s.professor = :user AND s.subjectName= :subjectName", Subject.class)
+                .setParameter("subjectName",subjectName)
+                .setParameter("user", user)
+                .getResultList();
+
+        if (!subjects.isEmpty()){
+            em.remove(subjects.get(0));
+        }
+        em.getTransaction().commit();
+        em.close();
+    }
 }

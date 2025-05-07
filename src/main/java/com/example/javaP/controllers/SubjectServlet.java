@@ -5,17 +5,17 @@ import com.example.javaP.dao.UserDao;
 import com.example.javaP.models.Subject;
 import com.example.javaP.models.User;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.*;
 
+import java.io.File;
 import java.io.IOException;
+
 import java.security.GeneralSecurityException;
 import java.util.List;
-
+@MultipartConfig
 public class SubjectServlet extends HttpServlet {
-private SubjectDao subjectDao;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -27,6 +27,9 @@ private SubjectDao subjectDao;
             }
             else if ("/update".equals(servletPath)) {
                 handleupdateDashboard(request, response);}
+            else if( request.getParameter("action").equals("delete")){
+                handleDeleteDashboard(request, response);
+            }
 
             else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown path");
@@ -49,10 +52,19 @@ private SubjectDao subjectDao;
     }
 }}
     protected void handleAddDashboard (HttpServletRequest request, HttpServletResponse response)
-            throws IOException, GeneralSecurityException, ServletException {
+            throws  GeneralSecurityException {
         try{
         String subjectDescription = request.getParameter("subjectDescription");
         String subjectName = request.getParameter("subjectName");
+            Part filePart = request.getPart("subjectImage"); // name in input
+            String fileName = new File(filePart.getSubmittedFileName()).getName();
+            String uploadPath = getServletContext().getRealPath("") + "uploads";
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdir();
+
+            // Save the file
+            String filePath = uploadPath + File.separator + fileName;
+            filePart.write(filePath);
         String userName = null;
         Cookie[] cookies = request.getCookies();
         if(cookies !=null){
@@ -61,12 +73,13 @@ private SubjectDao subjectDao;
             }
         }
         if(userName == null)
-        {response.sendRedirect("login.jsp");}
+        {response.sendRedirect("landingPage.jsp");}
         else if (subjectDescription != null && subjectName != null) {
+
              UserDao userDao = new UserDao();
             User user = userDao.findByEmail(userName);
 
-            Subject subject= new Subject(subjectName,subjectDescription,  user);
+            Subject subject= new Subject(subjectName,subjectDescription,  user,"uploads/" + fileName);
             System.out.println(subject.getSubjectName());
             SubjectDao subjectDao = new SubjectDao();
             subjectDao.save(subject);
@@ -80,7 +93,28 @@ private SubjectDao subjectDao;
         System.out.println("error is "+e.getMessage());}
     }
     protected void handleDeleteDashboard (HttpServletRequest request, HttpServletResponse response)
-            throws  IOException ,GeneralSecurityException{}
+            throws  IOException ,GeneralSecurityException{
+        try{
+            String subjectName = request.getParameter("subjectName");
+            String userName = null;
+            Cookie[] cookies = request.getCookies();
+            System.out.println(cookies[0].toString());
+
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("userName")) userName = cookie.getValue();
+            }
+            if(userName == null)
+            {response.sendRedirect("landingPage.jsp");}
+            else {
+                UserDao userDao = new UserDao();
+                User user = userDao.findByEmail(userName);
+                SubjectDao subjectDao = new SubjectDao();
+                subjectDao.removeSubject(subjectName, user);
+                response.sendRedirect(request.getContextPath() + "/dashboard");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());}
+    }
     protected void handleupdateDashboard (HttpServletRequest request, HttpServletResponse response)
             throws IOException, GeneralSecurityException, ServletException {
         String userName = null;
@@ -91,7 +125,7 @@ private SubjectDao subjectDao;
             }
         }
         if (userName == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("landing¨Page.jsp");
         } else {
             UserDao userDao = new UserDao();
             User user = userDao.findByEmail(userName);
@@ -110,7 +144,7 @@ private SubjectDao subjectDao;
                 if(cookie.getName().equals("userName")) userName = cookie.getValue();
             }
         if(userName == null)
-        {response.sendRedirect("login.jsp");}
+        {response.sendRedirect("landingPage.jsp");}
         else {
             UserDao userDao = new UserDao();
             User user = userDao.findByEmail(userName);

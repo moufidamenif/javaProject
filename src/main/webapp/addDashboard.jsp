@@ -11,7 +11,8 @@
     <title>Subject Add</title>
 </head>
 <body>
-<form id="addDashboard" action="<%= request.getContextPath() %>/dashboard/add" method="POST">
+<%@ include file="navbar.jsp" %>
+<form id="addDashboard" action="<%= request.getContextPath() %>/dashboard/add" method="POST" enctype="multipart/form-data">
     <div class="tr">
         <label  for="subjectName" style="display: block; margin-bottom: 10px;">subjectName</label>
         <input  type="text" name="subjectName" id ="subjectName" required style="
@@ -24,6 +25,15 @@
     <div class="tr">
         <label  for="subjectDescription" style="display: block; margin-bottom: 10px;">subjectDescription</label>
         <input id ="subjectDescription"   type="text" name="subjectDescription" required style="
+    border-radius: 20px;
+  width : 400px;
+    height: 30px;
+    border-color: #49BBBD;"/>
+
+    </div>
+    <div class="tr">
+        <label  for="subjectImage" style="display: block; margin-bottom: 10px;">subjectImage</label>
+        <input id ="subjectImage"   type="file" name="subjectImage" required style="
     border-radius: 20px;
   width : 400px;
     height: 30px;

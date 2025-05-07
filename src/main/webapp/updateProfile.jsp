@@ -14,6 +14,7 @@
     <script src="./js/landingPage.js"></script>
 </head>
 <body>
+<%@ include file="navbar.jsp" %>
 <div  class="wrapper">
     <img src="./images/updateProfile.png"  >
     <div >

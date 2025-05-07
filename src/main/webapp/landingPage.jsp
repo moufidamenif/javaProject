@@ -14,7 +14,7 @@
 </head>
 <body>
 
-
+<%@ include file="navbar.jsp" %>
 <div  class="wrapper">
 <img src="./images/landingPage.png"  >
     <div >

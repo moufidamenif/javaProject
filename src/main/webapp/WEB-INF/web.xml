@@ -21,6 +21,7 @@
     <servlet>
         <servlet-name>SubjectServlet</servlet-name>
         <servlet-class>com.example.javaP.controllers.SubjectServlet</servlet-class>
+
         <load-on-startup>1</load-on-startup>
 
     </servlet>

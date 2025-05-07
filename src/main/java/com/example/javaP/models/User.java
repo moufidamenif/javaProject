@@ -86,6 +86,9 @@ public boolean getResetPasswordvalidated() {
 public void setResetPasswordvalidated(boolean resetPasswordvalidated) {
         this.resetPasswordvalidated = resetPasswordvalidated;
 }
+public String getUserName() {
+        return this.userName;
+}
 public void setUserPhone(long userPhone) {
         this.userPhone = userPhone;
 }
