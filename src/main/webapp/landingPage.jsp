@@ -10,11 +10,11 @@
 <head>
     <title>Landing Page</title>
     <link rel="stylesheet" type="text/css" href="./css/landingPage.css">
+    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
     <script src="./js/landingPage.js"></script>
 </head>
 <body>
 
-<%@ include file="navbar.jsp" %>
 <div  class="wrapper">
 <img src="./images/landingPage.png"  >
     <div >

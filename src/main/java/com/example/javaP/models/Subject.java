@@ -20,6 +20,8 @@ public class Subject {
     private User professor;
     @ManyToMany(mappedBy = "subjects")
     private List<User> students;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Course> courses ;
     public Subject() {
 
     }

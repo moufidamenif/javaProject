@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Subject Add</title>
+    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
@@ -45,6 +46,6 @@
     <input type="submit" value="Submit"  style="margin-top: 30px; width : 400px;
     height: 30px;background-color: #49BBBD ;border-radius: 20px "/>
 </form>
-
+<%@ include file="footer.jsp" %>
 </body>
 </html>

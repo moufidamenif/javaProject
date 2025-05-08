@@ -45,4 +45,24 @@ public class SubjectDao {
         em.getTransaction().commit();
         em.close();
     }
+    public Subject findBySubjectName(String subjectName, User user) {
+        try {
+
+
+            EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            List<Subject> subjects = em.createQuery(
+                            "SELECT s FROM Subject s WHERE s.professor = :user AND s.subjectName= :subjectName", Subject.class)
+                    .setParameter("subjectName", subjectName)
+                    .setParameter("user", user)
+                    .getResultList();
+            em.getTransaction().commit();
+            em.close();
+            return subjects.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

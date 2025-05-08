@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Landing Page</title>
+    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
     <link rel="stylesheet" type="text/css" href="./css/landingPage.css">
     <script src="./js/landingPage.js"></script>
 </head>
@@ -79,5 +80,6 @@
 </form>
     </div>
 </div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

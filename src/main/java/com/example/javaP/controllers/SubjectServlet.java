@@ -135,7 +135,7 @@ public class SubjectServlet extends HttpServlet {
     protected void handleDashboard (HttpServletRequest request, HttpServletResponse response)
             throws IOException, GeneralSecurityException, ServletException {
         try{
-            System.out.println("working");
+
         String userName = null;
         Cookie[] cookies = request.getCookies();
         System.out.println(cookies[0].toString());

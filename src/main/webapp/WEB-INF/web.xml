@@ -25,6 +25,13 @@
         <load-on-startup>1</load-on-startup>
 
     </servlet>
+    <servlet>
+        <servlet-name>CourseServlet</servlet-name>
+        <servlet-class>com.example.javaP.controllers.courseServlet</servlet-class>
+
+        <load-on-startup>1</load-on-startup>
+
+    </servlet>
 
 <servlet-mapping>
 
@@ -47,5 +54,9 @@
     <servlet-mapping>
         <servlet-name>SubjectServlet</servlet-name>
         <url-pattern>/dashboard/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseServlet</servlet-name>
+        <url-pattern>/course/*</url-pattern>
     </servlet-mapping>
 </web-app>

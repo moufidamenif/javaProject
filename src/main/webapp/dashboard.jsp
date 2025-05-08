@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>dashboard subjects</title>
+    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
@@ -36,9 +37,7 @@
 
 <h3>Your Subjects:</h3>
 
-<ul style="display: flex; flex-direction: row ;gap: 1rem;
-  padding: 0;
-  margin: 0;
+<ul style="display: flex; flex-wrap: wrap; ;gap: 1rem;padding: 0; margin: 0;
   justify-content: space-around;">
     <%
         List<Subject> subjects = (List<Subject>) request.getAttribute("subjects");
@@ -46,7 +45,9 @@
             for (Subject subject : subjects) {
     %>
 
-    <li style="  position: relative;list-style-type: none;flex: 1 1 200px;
+    <form action="<%= request.getContextPath() %>/course" method="get" style="margin: 0; padding: 0;">
+        <input type="hidden" name="subjectName" value="<%= subject.getSubjectName() %>">
+    <li onclick="this.closest('form').submit()" style="  position: relative;list-style-type: none;flex: 1 1 200px;
   width: 100%; height: 200px; overflow: hidden;padding: 0">
         <div>
         <img src="<%= request.getContextPath() + "/" + subject.getImagePath() %>" alt="Subject Image" style="
@@ -68,6 +69,7 @@
             </form>
         </div>
     </li>
+    </form>
     <%
         }
     } else {
@@ -78,7 +80,8 @@
     %>
 </ul>
 
-<button style="float: right ;margin-top: 30px;  width: 161.2px;
+<button style=" width:600px;margin: 30px auto;
     height: 45.2px;background-color: #49BBBD ;border-radius: 10px ;border: none "><a href="addDashboard.jsp" style="all: unset">addSubject</a></button>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
