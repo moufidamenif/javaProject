@@ -2,7 +2,9 @@ package com.example.javaP.controllers;
 
 import com.example.javaP.dao.SubjectDao;
 import com.example.javaP.dao.UserDao;
+import com.example.javaP.dao.pdfDao;
 import com.example.javaP.models.Course;
+import com.example.javaP.models.Pdf;
 import com.example.javaP.models.Subject;
 import com.example.javaP.models.User;
 import jakarta.servlet.ServletException;
@@ -32,7 +34,10 @@ public class courseServlet extends HttpServlet {
                 handleDeleteCourse(request, response);
             } else if ("/update".equals(servletPath)) {
                 handleUpdateCourse(request, response);
-            } else {
+            }
+            else if("/details".equals(servletPath)) {
+                handleDetailsCourse(request, response);
+            }else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown path");
             }
         } catch (Exception e) {
@@ -127,11 +132,10 @@ public class courseServlet extends HttpServlet {
      protected void handleDeleteCourse(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
          try{
+             String subjectName = request.getParameter("subjectName");
              String courseId = request.getParameter("courseId");
-             String subjectName =request.getParameter("subjectName");
              String userName = null;
              Cookie[] cookies = request.getCookies();
-             System.out.println(cookies[0].toString());
 
              for(Cookie cookie : cookies){
                  if(cookie.getName().equals("userName")) userName = cookie.getValue();
@@ -151,4 +155,29 @@ public class courseServlet extends HttpServlet {
 
     protected void handleUpdateCourse(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {}
+    protected void  handleDetailsCourse (HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        try{
+            String courseId = request.getParameter("courseId");
+            courseDao courseDao = new courseDao();
+            Course course = courseDao.findCourse(parseLong(courseId));
+            String userName = null;
+            Cookie[] cookies = request.getCookies();
+
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("userName")) userName = cookie.getValue();
+            }
+            if(userName == null)
+            {response.sendRedirect("landingPage.jsp");}
+            else if (courseId!=null){
+                pdfDao pdfDao = new pdfDao();
+                List<Pdf> pdfs = pdfDao.pdfByCourse(course);
+                request.setAttribute("pdfs", pdfs);
+                request.setAttribute("course", course);
+                request.getRequestDispatcher("pdfList.jsp").forward(request, response);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

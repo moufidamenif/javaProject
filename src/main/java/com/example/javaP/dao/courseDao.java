@@ -46,4 +46,12 @@ public class courseDao {
         em.close();
 
     }
+    public Course findCourse(long courseId){
+        EntityManager em= JpaUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+        Course course = em.find(Course.class, courseId);
+        em.getTransaction().commit();
+        em.close();
+        return course;
+    }
 }

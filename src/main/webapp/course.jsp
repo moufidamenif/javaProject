@@ -38,7 +38,7 @@
 
             <li  style=" position: relative;list-style-type: none;flex: 1 1 300px;
                  height : 100% ; width: 100%; ; overflow: hidden;padding: 0">
-                <div  style=" margin:10px  auto ; text-align:center;border-radius: 5px ;background-color: grey;color: black; height: 300px">
+                <div  style=" margin:10px  auto ; text-align:center;border-radius: 5px ;background-color: grey;color: black; height: 500px">
 
 
                     <div><b><%= course.getCourseName() %></b></div>
@@ -47,10 +47,22 @@
                     <video  id="video_<%= course.getCourseId() %>" controls style="
                             object-fit: cover;
                             display: block;
-                            border-radius: 8px;">
+                            border-radius: 8px;
+                            width: 100%;
+                            height: 400px">
                         <source src="<%= request.getContextPath() + "/" + course.getVideoLink() %>" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <form action="<%= request.getContextPath() %>/course/details" method="post" style="">
+                        <input type="hidden" name="courseId" value="<%=course.getCourseId()%>">
+                    <button type="submit" style=" padding: 0;
+    border-radius: 10px;
+    background-color: #49BBBD;
+    border :none;
+    opacity: 100%;
+    width: 161.2px;
+    height: 45.2px;">Course's Details </button>
+                    </form>
 
                 </div>
                 <form action="<%= request.getContextPath() %>/course/delete" method="post" style="">
