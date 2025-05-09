@@ -15,7 +15,7 @@
         <property name="jakarta.persistence.jdbc.url"
                   value="jdbc:mysql://localhost:3306/javaproject1?autoReconnect=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;deregisterDriversAtClose=true&amp;useConfigs=maxPerformance"/>
         <property name="jakarta.persistence.jdbc.user" value="root"/>
-        <property name="jakarta.persistence.jdbc.password" value="moufida12345*&amp;"/>
+        <property name="jakarta.persistence.jdbc.password" value="souhail12345*&amp;"/>
         <!--  Hibernate Properties  -->
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 
