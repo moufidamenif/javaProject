@@ -9,14 +9,16 @@
 <html>
 <head>
     <title>Landing Page</title>
-    <link rel="stylesheet" type="text/css" href="./css/landingPage.css">
-    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/landingPage.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
     <script src="./js/landingPage.js"></script>
 </head>
 <body>
 
-<div  class="wrapper">
-<img src="./images/landingPage.png"  >
+<div style="background: linear-gradient(180deg, #D7FAF8 0%, #F5F7FA 100%);"  class="wrapper">
+    <div style="justify-content: center ;align-items: center
+;"><img src="./images/landingPage.png" style="margin: 10px; width: 550px ; height: 650px"></div>
+
     <div >
     <h1>welcome to Learnify</h1>
         <div id ="container_buttons">

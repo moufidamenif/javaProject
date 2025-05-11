@@ -37,9 +37,8 @@ public class courseServlet extends HttpServlet {
             }
             else if("/details".equals(servletPath)) {
                 handleDetailsCourse(request, response);
-            }else {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown path");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -48,11 +47,11 @@ public class courseServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String servletPath = request.getServletPath(); // returns "/login" or "/register"
-        if ("/course".equals(servletPath)) {
+        String servletPath = request.getServletPath();
+
+        if ("/course".equals(servletPath)&& request.getPathInfo()==null) {
             handleCourse(request, response);
         }
-
     }
 
     protected void handleCourse(HttpServletRequest request, HttpServletResponse response)
@@ -169,14 +168,16 @@ public class courseServlet extends HttpServlet {
             }
             if(userName == null)
             {response.sendRedirect("landingPage.jsp");}
-            else if (courseId!=null){
+            else {
                 pdfDao pdfDao = new pdfDao();
                 List<Pdf> pdfs = pdfDao.pdfByCourse(course);
                 request.setAttribute("pdfs", pdfs);
                 request.setAttribute("course", course);
-                request.getRequestDispatcher("pdfList.jsp").forward(request, response);
+                request.getRequestDispatcher("/pdfList.jsp").forward(request, response);
+
             }
         }catch (Exception e){
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

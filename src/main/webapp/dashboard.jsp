@@ -11,12 +11,40 @@
 <html>
 <head>
     <title>dashboard subjects</title>
-    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
 </head>
 <body>
+<script>
+    function deleteSubject(url, subjectName) {
+        if (!confirm(`Are you sure you want to delete subject "${subjectName}"?`)) {
+            return;
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ subjectName: subjectName })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Subject deleted successfully!');
+                    location.reload(); // refresh the page
+                } else {
+                    alert('Failed to delete subject.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            });
+    }
+</script>
+
 <%@ include file="navbar.jsp" %>
 <div style="display: grid;
-    grid-template-columns: repeat(2, 1fr); background-color: rgba(157, 204, 255, 0.2);
+    grid-template-columns: repeat(2, 1fr); background: linear-gradient(180deg, #D7FAF8 0%, #F5F7FA 100%);
 ">
     <div>
         <h1>Welcome to your dashboard, Professor.</h1>
@@ -47,28 +75,22 @@
 
     <form action="<%= request.getContextPath() %>/course" method="get" style="margin: 0; padding: 0;">
         <input type="hidden" name="subjectName" value="<%= subject.getSubjectName() %>">
-    <li onclick="this.closest('form').submit()" style="  position: relative;list-style-type: none;flex: 1 1 200px;
-  width: 100%; height: 200px; overflow: hidden;padding: 0">
-        <div>
-        <img src="<%= request.getContextPath() + "/" + subject.getImagePath() %>" alt="Subject Image" style="
-  width: 100%; height: 100%; object-fit: cover;
+        <li  style="  position: relative;list-style-type: none;flex: 1 1 200px;
+  width: 100%; overflow: hidden;padding: 0">
+            <div onclick="this.closest('form').submit()">
+                <img src="<%= request.getContextPath() + "/" + subject.getImagePath() %>" alt="Subject Image" style=" object-fit: cover;
   display: block;
   border-radius: 8px;" />
+            </div>
+                <div style=" height: 40px; width: 150px;text-align:center; border-radius: 5px ;background-color: rgba(255, 255, 255, 0.7);color: black;"><%= subject.getSubjectName() %></div>
+                <button
+                        onclick="deleteSubject('<%= request.getContextPath() %>/dashboard/delete', '<%= subject.getSubjectName() %>')"
+                        style="margin-top : 30px; border-radius: 10px; background-color: #49BBBD; border: none; height: 40px; width: 150px; ">
+                    Delete
+                </button>
 
-     <div style="text-align:center;height: 40px; width: 150px; position: absolute; bottom: 10px; left: 40px;border-radius: 5px ;background-color: rgba(255, 255, 255, 0.7);color: black;"><%= subject.getSubjectName() %></div>
-            <form action="<%= request.getContextPath() %>/dashboard" method="post" style="margin-top: 10px;position: absolute; bottom: -10px; right: 10px;">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="subjectName" value="<%= subject.getSubjectName() %>">
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this subject?')" style=" padding: 0;
-    border-radius: 10px;
-    background-color: #49BBBD;
-    border :none;
-    opacity: 100%;
-    width: 161.2px;
-    height: 45.2px;">Delete</button>
-            </form>
-        </div>
-    </li>
+
+        </li>
     </form>
     <%
         }
@@ -80,7 +102,7 @@
     %>
 </ul>
 
-<button style=" width:600px;margin: 30px auto;
+<button style=" width:600px;margin: 70px auto;
     height: 45.2px;background-color: #49BBBD ;border-radius: 10px ;border: none "><a href="addDashboard.jsp" style="all: unset">addSubject</a></button>
 <%@ include file="footer.jsp" %>
 </body>

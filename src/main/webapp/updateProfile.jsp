@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>Landing Page</title>
-    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
-    <link rel="stylesheet" type="text/css" href="./css/landingPage.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/landingPage.css">
     <script src="./js/landingPage.js"></script>
 </head>
 <body>

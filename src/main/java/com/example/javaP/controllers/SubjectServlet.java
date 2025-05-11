@@ -27,9 +27,6 @@ public class SubjectServlet extends HttpServlet {
             }
             else if ("/update".equals(servletPath)) {
                 handleupdateDashboard(request, response);}
-            else if( request.getParameter("action").equals("delete")){
-                handleDeleteDashboard(request, response);
-            }
 
             else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown path");

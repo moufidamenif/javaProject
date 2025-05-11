@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOTC - Studying Online</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Learnify- Studying Online</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
 
 </head>
 <body>
 <header>
-    <div class="logo">TOTC</div>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Courses</a>
-        <a href="#">Careers</a>
-        <a href="blog.jsp">Blog</a>
-        <a href="#">About Us</a>
-    </nav>
+    <%@ include file="navbar.jsp" %>
     <div class="auth-buttons">
-        <button class="login">Login</button>
-        <button class="signup">Sign Up</button>
+        <a href="landingPage.jsp"  style="text-decoration: none;">
+        <button type="button" class="login">Login</button>
+        </a>
+        <a href="landingPage.jsp"  style="text-decoration: none;">
+        <button type="button" class="signup">Sign Up</button>
+        </a>
     </div>
 </header>
-
 <section class="hero">
     <div class="text-content">
         <h1><span class="highlight">Studying</span> Online is now<br>much easier</h1>
-        <p>TOTC is an interesting platform that will teach you<br>in more an interactive way</p>
+        <p>Learnify is an interesting platform that will teach you<br>in more an interactive way</p>
         <div class="buttons">
             <button class="join">Join for free</button>
             <div class="video-btn">
@@ -69,7 +65,7 @@
 
     <div class="cloud-software">
         <h3>All-In-One <span style="color: #00C9A7;">Cloud Software.</span></h3>
-        <p>TOTC is one powerful online software suite that combines all the tools needed to run a successful school or office.</p>
+        <p>Learnify is one powerful online software suite that combines all the tools needed to run a successful school or office.</p>
     </div>
 
     <div class="features">
@@ -92,9 +88,9 @@
 </section>
 
 <section class="what_totc">
-    <h1><span class="highlight">What is</span> TOTC?</h1>
+    <h1><span class="highlight">What is</span> Learnify?</h1>
     <p>
-        TOTC is a platform that allows educators to create online classes whereby <br>
+      Learnify is a platform that allows educators to create online classes whereby <br>
         they can store the course materials online; manage assignments, quizzes and exams;<br>
         monitor due dates; grade results and provide students with feedback all in one place.
     </p>
@@ -220,12 +216,12 @@
 <section class="testimonial-section">
     <h2>TESTIMONIAL</h2>
     <h3>What They Say?</h3>
-    <p>TOTC has got more than 100k positive ratings from our users around the world.</p>
+    <p>Learnify has got more than 100k positive ratings from our users around the world.</p>
     <p>Some of the students and teachers were greatly helped by the Skilline.</p>
     <p>Are you too? Please give your assessment</p>
 
     <div class="testimonial-card">
-        <p class="testimonial-text">"Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. TOTC is exactly what our business has been lacking."</p>
+        <p class="testimonial-text">"Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. Learnify is exactly what our business has been lacking."</p>
         <div class="testimonial-author">
             <img src="https://i.imgur.com/qWbHHQH.png" alt="Gloria Rose" class="author-avatar">
             <div class="author-info">
@@ -240,7 +236,7 @@
 
 <section class="news-section">
     <h2>Lastest News and Resources</h2>
-    <p>See the developments that have occurred to TOTC in the world</p>
+    <p>See the developments that have occurred to Learnify in the world</p>
 
     <div class="news-cards">
         <div class="news-card">
@@ -275,18 +271,7 @@
     </form>
 </section>
 
-<footer>
-    <div class="footer-logo">TOTC</div>
-    <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Careers</a>
-        <a href="#">Blog</a>
-        <a href="#">About Us</a>
-    </div>
-    <div class="copyright">© 2023 TOTC. All rights reserved.</div>
-</footer>
 
+<%@ include file="footer.jsp" %>
 </body>
 </html>
-i.imgur.com

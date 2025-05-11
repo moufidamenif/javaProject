@@ -8,23 +8,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
 </head>
 
 <body>
 <%@ include file="navbar.jsp" %>
+<main style="flex: 1">
 <div style="display: grid;
     grid-template-columns: repeat(2, 1fr); background-color: rgba(157, 204, 255, 0.2);
 ">
 
 
 
-</div>
+
 <%
-    Course course =(Course) request.getAttribute("course");%>
-<h1><%="your "+course+"pdfs"%></h1>
+    Course course =(Course) request.getAttribute("course");
+   String courseName = course.getCourseName();%>
+<h1><%="your "+courseName+"pdfs"%></h1>
 <ul style="display: flex; flex-wrap: wrap; ;gap: 1rem;padding: 0; margin: 0;
   justify-content: space-around;">
     <%
@@ -37,13 +40,7 @@
         <li onclick="this.closest('form').submit()" style="  position: relative;list-style-type: none;flex: 1 1 200px;
   width: 100%; height: 200px; overflow: hidden;padding: 0">
             <div>
-                <file src="<%= request.getContextPath() + "/" + pdf.getPdfLink() %>" alt="pdf file" style="
-  width: 100%; height: 100%; object-fit: cover;
-  display: block;
-  border-radius: 8px;" />
-
-
-
+                <iframe src="<%= request.getContextPath() + "/" + pdf.getPdfLink() %>" width="100%" height="200px"></iframe>
             </div>
         </li>
     <%
@@ -55,5 +52,7 @@
         }
     %>
 </ul>
+</div>
+</main>
+<%@ include file="footer.jsp" %>
 </body>
-</html>

@@ -9,10 +9,12 @@
 <html>
 <head>
     <title>Subject Add</title>
-    <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
 </head>
 <body>
+
 <%@ include file="navbar.jsp" %>
+<main  style="flex: 1">
 <form id="addDashboard" action="<%= request.getContextPath() %>/dashboard/add" method="POST" enctype="multipart/form-data">
     <div class="tr">
         <label  for="subjectName" style="display: block; margin-bottom: 10px;">subjectName</label>
@@ -46,6 +48,7 @@
     <input type="submit" value="Submit"  style="margin-top: 30px; width : 400px;
     height: 30px;background-color: #49BBBD ;border-radius: 20px "/>
 </form>
+</main>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

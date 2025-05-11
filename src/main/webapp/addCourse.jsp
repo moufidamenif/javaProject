@@ -10,9 +10,11 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/bodyCss.css">
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
+<main style="flex: 1">
 <form id="addCourse" action="<%= request.getContextPath() %>/course/add" method="POST" enctype="multipart/form-data">
     <%
         String subjectName = request.getParameter("subjectName");
@@ -52,6 +54,8 @@
     <input type="submit" value="Submit"  style="margin-top: 30px; width : 400px;
     height: 30px;background-color: #49BBBD ;border-radius: 20px "/>
 </form>
+</main>
 <%@ include file="footer.jsp" %>
+
 </body>
 </html>

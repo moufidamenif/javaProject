@@ -95,7 +95,7 @@ public class UserServlet extends HttpServlet {
 
 
                 userDao.save(user);
-                response.sendRedirect("userDetails.jsp");
+                response.sendRedirect(request.getContextPath()+"/userDetails.jsp");
             } catch (Exception e) {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while registering.");
 

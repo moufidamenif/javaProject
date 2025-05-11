@@ -11,12 +11,13 @@
 <%@ page import="com.example.javaP.models.Course" %>
 <html>
 <head>
+
     <title>courses subjects</title>
     <link rel="stylesheet" type="text/css" href="./css/bodyCss.css">
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
-
+<main style="flex: 1">
 <%
     Subject subject = (Subject) request.getAttribute("subject");
     String subjectName =subject.getSubjectName();
@@ -53,15 +54,15 @@
                         <source src="<%= request.getContextPath() + "/" + course.getVideoLink() %>" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <form action="<%= request.getContextPath() %>/course/details" method="post" style="">
+                    <form action="<%= request.getContextPath()+"/course/details" %>" method="post" >
                         <input type="hidden" name="courseId" value="<%=course.getCourseId()%>">
                     <button type="submit" style=" padding: 0;
     border-radius: 10px;
     background-color: #49BBBD;
     border :none;
     opacity: 100%;
-    width: 161.2px;
-    height: 45.2px;">Course's Details </button>
+    width: 161px;
+    height: 45px;">Course's Details </button>
                     </form>
 
                 </div>
@@ -75,15 +76,12 @@
     background-color: #49BBBD;
     border :none;
     opacity: 100%;
-    width: 161.2px;
-    height: 45.2px;">Delete</button>
+    width: 161px;
+    height: 45px;">Delete</button>
                 </form>
             </li>
 
 
-
-        </div>
-    </li>
     <%
         }
     } else {
@@ -96,10 +94,11 @@
 
 <form action="addCourse.jsp" method="post" style="display: flex; justify-content: center; margin: 30px auto;">
     <input type="hidden" name="subjectName" value="<%= subject.getSubjectName() %>">
-    <button type="submit" style="width:600px; height: 45.2px; background-color: #49BBBD; border-radius: 10px; border: none;">
+    <button type="submit" style="width:600px; height: 45px; background-color: #49BBBD; border-radius: 10px; border: none;">
         ADD COURSE
     </button>
 </form>
+</main>
 <%@ include file="footer.jsp" %>
 </body>
 </html>
