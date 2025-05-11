@@ -22,5 +22,4 @@ This is a dynamic web-based educational platform developed as part of an academi
 - **Maven** (for dependency management)
 - **Apache Tomcat** (Servlet container)
 
-## 🗂️ Project Structure
 
